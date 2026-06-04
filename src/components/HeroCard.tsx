@@ -3,7 +3,7 @@
 import React from 'react';
 import { Flame, Trophy, Calendar, Sparkles } from 'lucide-react';
 import BentoCard from './BentoCard';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export default function HeroCard() {
   const currentDay = new Date().getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
@@ -19,7 +19,7 @@ export default function HeroCard() {
     { day: 'Sun', completed: false },
   ];
 
-  const flameVariants = {
+  const flameVariants: Variants = {
     idle: {
       scale: [1, 1.08, 1],
       filter: [

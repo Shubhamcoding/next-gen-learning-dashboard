@@ -1,13 +1,13 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 interface BentoGridProps {
   children: React.ReactNode;
 }
 
-export const gridItemVariants = {
+export const gridItemVariants: Variants = {
   hidden: { 
     opacity: 0, 
     y: 20 
@@ -24,7 +24,7 @@ export const gridItemVariants = {
 };
 
 export default function BentoGrid({ children }: BentoGridProps) {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,

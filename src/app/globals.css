@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Deep Emerald & Sapphire Theme */
+  --background: #020606; /* Deep obsidian teal */
+  --foreground: #f1f6f5;
+  
+  --card-bg: rgba(6, 16, 15, 0.65); /* Deep emerald/teal glass */
+  --card-border: rgba(255, 255, 255, 0.04);
+  
+  /* Brand Glow Colors */
+  --color-primary: #10b981;    /* Emerald Green */
+  --color-secondary: #3b82f6;  /* Sapphire Blue */
+  --color-accent: #2dd4bf;     /* Mint Green / Teal */
+
+  color-scheme: dark;
+  
+  /* Scrollbar Customization */
+  --color-scrollbar-track: #020606;
+  --color-scrollbar-thumb: #142b27;
+  scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+  scrollbar-width: thin;
+  
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary-glow: var(--color-primary);
+  --color-secondary-glow: var(--color-secondary);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Custom background pattern for futuristic grid effect */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+}
+
+/* Ambient glow blobs in the background */
+.bg-glow-blob {
+  filter: blur(140px);
+  opacity: 0.12;
+  pointer-events: none;
+  position: absolute;
+  border-radius: 9999px;
+  z-index: 0;
+}
+
+/* Legacy Webkit scrollbar fallback wrapped in supports query to prevent conflicts */
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-scrollbar-track);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-scrollbar-thumb);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #1d3d38;
+  }
+}
+
+/* Glassmorphism utility card */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle grain noise overlay to give an organic feel */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.015;
+  pointer-events: none;
+}
+
+/* Gradient Mesh background for course cards adapted to Emerald/Sapphire theme */
+.bg-mesh-purple {
+  background: radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+}
+
+.bg-mesh-cyan {
+  background: radial-gradient(circle at 0% 0%, rgba(45, 212, 191, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 100% 100%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+}
+
+.bg-mesh-amber {
+  background: radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 100% 100%, rgba(45, 212, 191, 0.08) 0%, transparent 50%);
+}
+
+.bg-mesh-emerald {
+  background: radial-gradient(circle at 0% 0%, rgba(6, 182, 212, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 100% 100%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+}
+
+/* Animated Progress bar pulse */
+@keyframes progressPulse {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 0.75; }
+}
+
+.progress-active {
+  animation: progressPulse 2s infinite ease-in-out;
 }
